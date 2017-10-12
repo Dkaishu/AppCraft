@@ -1,8 +1,10 @@
-package com.tincher.appcraft.net.networkstate;
+package com.tincher.appcraft.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.tincher.appcraft.net.networkstate.NetInfo;
 
 public class NetworkUtil {
 

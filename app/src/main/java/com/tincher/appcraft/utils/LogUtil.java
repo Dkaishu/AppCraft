@@ -1,10 +1,11 @@
 package com.tincher.appcraft.utils;
 
-import android.support.compat.BuildConfig;
 import android.util.Log;
 
+import com.tincher.appcraft.BuildConfig;
+
 public final class LogUtil {
-    public static Boolean isDebug = BuildConfig.DEBUG;
+    public static Boolean isDebug = BuildConfig.SHOWLOG;
     public static String Debug = "debug_";
 
     public static void v(String tagName, String message) {

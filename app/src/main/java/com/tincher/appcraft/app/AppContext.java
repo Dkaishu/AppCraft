@@ -21,6 +21,11 @@ public class AppContext extends BaseApplication {
         httpUtil.init(this);
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+    }
+
     /**
      * 获得当前app运行的AppContext
      *

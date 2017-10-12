@@ -9,6 +9,7 @@ import android.Manifest;
 public class PermissionConfig {
     /**
      * 全局的权限列表，默认每个 Activity 都会检测
+     * 此处的权限必须在 AndroidManifest 中声明，
      */
     public static final String[] permissions = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,

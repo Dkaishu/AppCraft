@@ -194,11 +194,13 @@ class DownUpLoadHelper extends BaseHelper{
             //下载完成
             if(DownloadStatus.DOWNLOADING.equals(fileInfo.getDownloadStatus())){
                 fileInfo.setDownloadStatus(DownloadStatus.COMPLETED);
-                File newFile = new File(fileInfo.getSaveFileDir(),fileInfo.getSaveFileNameWithExtension());
+//                File newFile = new File(fileInfo.getSaveFileDir(),fileInfo.getSaveFileNameWithExtension());
+                File newFile = new File(fileInfo.getSaveFileDir(),fileInfo.getSaveFileName());
                 //处理文件已存在逻辑
                 if(newFile.exists() && newFile.isFile()){
+                    newFile.delete();
                     filePath = fileInfo.getSaveFileDir()+fileInfo.getSaveFileNameCopy();
-                    newFile = new File(fileInfo.getSaveFileDir(),fileInfo.getSaveFileNameCopy());
+                    newFile = new File(fileInfo.getSaveFileDir(),fileInfo.getSaveFileName());
                 }
                 File oldFile = new File(fileInfo.getSaveFileDir(),fileInfo.getSaveFileNameEncrypt());
                 if(oldFile.exists() && oldFile.isFile()){

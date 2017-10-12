@@ -13,7 +13,7 @@ android {
     }
     buildTypes {
         release {
-//            buildConfigField "boolean", "DEBUG", "false"
+            buildConfigField "boolean", "SHOWLOG", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
@@ -30,7 +30,7 @@ android {
 
         }
         debug {
-//            buildConfigField "boolean", "DEBUG", "true"
+            buildConfigField "boolean", "SHOWLOG", "true"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->

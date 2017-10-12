@@ -5,6 +5,8 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.tincher.appcraft.utils.LogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class PermissionsChecker {
                     || ActivityCompat.shouldShowRequestPermissionRationale(
                     context, perm)) {
                 needRequestPermissionList.add(perm);
+                LogUtil.e("",perm);
             }
         }
         return needRequestPermissionList;

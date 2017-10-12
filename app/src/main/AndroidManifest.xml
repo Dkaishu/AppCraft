@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
 
     <application
         android:name=".app.AppContext"
@@ -20,6 +23,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="TEST_CHANNEL_VALUE"
+            android:value="${TEST_CHANNEL_VALUE}">
+        </meta-data>
+        <meta-data
+            android:name="ALL_CHANNEL_VALUE"
+            android:value="${TEST_CHANNEL_VALUE}">
+        </meta-data>
+
+
         <activity android:name=".main.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +43,24 @@
         </activity>
 
         <activity android:name=".main.example.activity.ExampleActivity"/>
+        <activity android:name=".update.DownloadActivity"/>
+        <activity android:name=".update.DownloadBreakpointsActivity"/>
+
+
+        <service android:name="com.tincher.appcraft.update.DownloadService"/>
+        <service android:name=".update.VersionUpdateService"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.tincher.appcraft.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <!--元数据-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

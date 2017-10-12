@@ -3,7 +3,8 @@ package com.tincher.appcraft.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import static com.tincher.appcraft.config.PathConfig.PREF_NAME;
+import static com.tincher.appcraft.config.PrefConfig.PREF_NAME;
+
 
 /** SharedPreferences的封装
  * Created by Administrator on 2016/9/27.

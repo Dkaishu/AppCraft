@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import com.tincher.appcraft.utils.NetworkUtil;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-﻿##提示
+##提示
 
 分包：
     base        :组件基础包 如 BaseActivity，BaseFragment
@@ -11,3 +11,6 @@
     user        :账户控制
     utils       :基础工具包
     widget      :自定义组件
+
+# okhttp3
+源自 https://github.com/MrZhousf/OkHttp3

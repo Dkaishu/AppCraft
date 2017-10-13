@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+//参考：https://segmentfault.com/a/1190000006940018
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -10,12 +12,42 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //AndroidManifest 中 TEST_CHANNEL_VALUE默认值
+        manifestPlaceholders = [TEST_CHANNEL_VALUE: "official"]
     }
+
+
+    //签名配置，用于在下面的 buildTypes 中引用：signingConfig signingConfigs.release，
+    // 也可直接在里面 buildTypes 里面配置
+    signingConfigs {
+        debug {
+            // No debug config
+//            storeFile file("${rootDir}/keystores/xqsg_debug.jks") //debug证书
+        }
+
+        release {
+//            storeFile file("${rootDir}/keystores/xqsg.jks") //release证书
+//            storePassword "test"                            //签名证书密码
+//            keyAlias "test"                                 //别名
+//            keyPassword "test"                              //别名密码
+        }
+    }
+
+    //用于生成不同编译类型的包，如debug和release包
     buildTypes {
         release {
-            buildConfigField "boolean", "SHOWLOG", "false"
-            minifyEnabled false
+//            storeFile file("../yourapp.keystore") //签名证书文件
+//            storePassword "your password"         //签名证书密码
+//            keyAlias "your alias"                 //别名
+//            keyPassword "your password"           //别名密码
+            buildConfigField "boolean", "SHOWLOG", "false"//在 BuildConfig 中会自动生成相应变量
+            minifyEnabled true                               //开启混淆
+            zipAlignEnabled true                             //开启Zipalign优化
+            shrinkResources true                             //移除无用的resource文件，此项只有在开启混淆时才生效
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release             //使用release证书签名
+
             applicationVariants.all { variant ->
                 if (variant.buildType.name.equals('release')) {
                     variant.outputs.each { output ->
@@ -30,8 +62,13 @@ android {
 
         }
         debug {
-            buildConfigField "boolean", "SHOWLOG", "true"
-            minifyEnabled false
+            buildConfigField "boolean", "SHOWLOG", "true"       //配置日志开关
+            versionNameSuffix "-debug"                          //包名后缀为“-debug”
+            zipAlignEnabled false                            //Zipalign优化
+            shrinkResources false                            // 移除无用的resource文件
+            minifyEnabled false                                 //是否混淆
+//            signingConfig signingConfigs.debug               //使用debug证书签名
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
                 if (variant.buildType.name.equals('debug')) {
@@ -45,6 +82,66 @@ android {
                 }
             }
         }
+    }
+
+    //配置 Lint 对 Java 和 XML 源文件的检查
+    //参考：https://developer.android.com/studio/write/lint.html?hl=zh-cn
+    lintOptions {
+        // Turns off checks for the issue IDs you specify.
+        disable 'TypographyFractions','TypographyQuotes'
+        // Turns on checks for the issue IDs you specify. These checks are in
+        // addition to the default lint checks.
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        // To enable checks for only a subset of issue IDs and ignore all others,
+        // list the issue IDs with the 'check' property instead. This property overrides
+        // any issue IDs you enable or disable using the properties above.
+        check 'NewApi', 'InlinedApi'
+        // If set to true, turns off analysis progress reporting by lint.
+        quiet true
+        // if set to true (default), stops the build if errors are found.
+        abortOnError false
+        // if true, only report errors.
+        ignoreWarnings true
+    }
+
+
+    //配置编译的jdk版本
+    compileOptions {
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_7
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_7
+    }
+
+
+    //动态地修改AndroidManifest中的渠道名,全部修改
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [ALL_CHANNEL_VALUE: name]
+    }
+
+
+    //    用于生成不同渠道的包
+    productFlavors {
+        xiaomi {
+            applicationId "com.tincher.appcraft"
+
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            versionCode rootProject.ext.versionCode
+            versionName rootProject.ext.versionName
+
+//            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+            //AndroidManifest 中 TEST_CHANNEL_VALUE默认值
+            manifestPlaceholders = [TEST_CHANNEL_VALUE: "xiaomi_test"]
+            multiDexEnabled true
+        }
+        baidu {}
+        wandoujia {}
+        _360 {}        // 或“"360"{}”，数字需下划线开头或加上双引号
+
+//          执行./gradlew assembleRelease ，将会打出所有渠道的release包；
+//          执行./gradlew assembleWandoujia，将会打出豌豆荚渠道的release和debug版的包；
+//          执行./gradlew assembleWandoujiaRelease将生成豌豆荚的release包。
+//          因此，可以结合buildType和productFlavor生成不同的Build Variants，即类型与渠道不同的组合
     }
 }
 

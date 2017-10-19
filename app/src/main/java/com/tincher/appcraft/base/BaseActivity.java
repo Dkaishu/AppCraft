@@ -38,12 +38,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     private NetworkStateListener networkStateListener;
 
     protected abstract int initLayout();
+    protected abstract void initView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(initLayout());
         ButterKnife.bind(this);
+        initView();
         initNetworkStateListener();
 
     }

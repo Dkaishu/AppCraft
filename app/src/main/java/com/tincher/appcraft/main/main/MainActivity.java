@@ -23,6 +23,11 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
     @OnClick({R.id.text, R.id.bt_download})
     public void onViewClicked(View view) {
         switch (view.getId()) {

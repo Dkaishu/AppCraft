@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//apply tinker插件
+apply plugin: 'com.tencent.tinker.patch'
 
 //参考：https://segmentfault.com/a/1190000006940018
 
@@ -16,7 +18,6 @@ android {
         //AndroidManifest 中 TEST_CHANNEL_VALUE默认值
         manifestPlaceholders = [TEST_CHANNEL_VALUE: "official"]
     }
-
 
     //签名配置，用于在下面的 buildTypes 中引用：signingConfig signingConfigs.release，
     // 也可直接在里面 buildTypes 里面配置
@@ -52,8 +53,8 @@ android {
                 if (variant.buildType.name.equals('release')) {
                     variant.outputs.each { output ->
                         def outputFile = output.outputFile
-                        if (outputFile != null && outputFile.name.endsWith(".apk")){
-                            def fileName = "my_${defaultConfig.versionCode}.apk"
+                        if (outputFile != null && outputFile.name.endsWith(".apk")) {
+                            def fileName = "${variant.productFlavors[0].name}_${defaultConfig.versionCode}.apk"
                             output.outputFile = new File(outputFile.parent, fileName)
                         }
                     }
@@ -63,7 +64,7 @@ android {
         }
         debug {
             buildConfigField "boolean", "SHOWLOG", "true"       //配置日志开关
-            versionNameSuffix "-debug"                          //包名后缀为“-debug”
+//            versionNameSuffix "-debug"                          //包名后缀为“-debug”
             zipAlignEnabled false                            //Zipalign优化
             shrinkResources false                            // 移除无用的resource文件
             minifyEnabled false                                 //是否混淆
@@ -74,9 +75,9 @@ android {
                 if (variant.buildType.name.equals('debug')) {
                     variant.outputs.each { output ->
                         def outputFile = output.outputFile
-                        if (outputFile != null && outputFile.name.endsWith(".apk")){
-                            def fileName = "my_${defaultConfig.versionCode}.apk"
-                            output.outputFile = new File(outputFile.parent, fileName)
+                        if (outputFile != null && outputFile.name.endsWith(".apk")) {
+                            def fileName = "${variant.productFlavors[0].name}_${defaultConfig.versionCode}_debug.apk"
+                            output.outputFile = new File(outputFile.parent+"/${variant.productFlavors[0].name}/", fileName)
                         }
                     }
                 }
@@ -88,10 +89,10 @@ android {
     //参考：https://developer.android.com/studio/write/lint.html?hl=zh-cn
     lintOptions {
         // Turns off checks for the issue IDs you specify.
-        disable 'TypographyFractions','TypographyQuotes'
+        disable 'TypographyFractions', 'TypographyQuotes'
         // Turns on checks for the issue IDs you specify. These checks are in
         // addition to the default lint checks.
-        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
         // To enable checks for only a subset of issue IDs and ignore all others,
         // list the issue IDs with the 'check' property instead. This property overrides
         // any issue IDs you enable or disable using the properties above.
@@ -104,39 +105,39 @@ android {
         ignoreWarnings true
     }
 
-
     //配置编译的jdk版本
     compileOptions {
         sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_7
         targetCompatibility org.gradle.api.JavaVersion.VERSION_1_7
     }
 
-
     //动态地修改AndroidManifest中的渠道名,全部修改
     productFlavors.all { flavor ->
         flavor.manifestPlaceholders = [ALL_CHANNEL_VALUE: name]
-    }
 
+//        minSdkVersion rootProject.ext.minSdkVersion
+//        targetSdkVersion rootProject.ext.targetSdkVersion
+//        versionCode rootProject.ext.versionCode
+//        versionName rootProject.ext.versionName
+    }
 
     //    用于生成不同渠道的包
     productFlavors {
-        xiaomi {
+        binnan {
             applicationId "com.tincher.appcraft"
 
-            minSdkVersion rootProject.ext.minSdkVersion
-            targetSdkVersion rootProject.ext.targetSdkVersion
-            versionCode rootProject.ext.versionCode
-            versionName rootProject.ext.versionName
-
-//            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//            minSdkVersion rootProject.ext.minSdkVersion
+//            targetSdkVersion rootProject.ext.targetSdkVersion
+//            versionCode rootProject.ext.versionCode
+//            versionName rootProject.ext.versionName
 
             //AndroidManifest 中 TEST_CHANNEL_VALUE默认值
-            manifestPlaceholders = [TEST_CHANNEL_VALUE: "xiaomi_test"]
+            manifestPlaceholders = [TEST_CHANNEL_VALUE: "binnan_test"]
             multiDexEnabled true
         }
         baidu {}
-        wandoujia {}
-        _360 {}        // 或“"360"{}”，数字需下划线开头或加上双引号
+//        wandoujia {}
+//        _360 {}        // 或“"360"{}”，数字需下划线开头或加上双引号
 
 //          执行./gradlew assembleRelease ，将会打出所有渠道的release包；
 //          执行./gradlew assembleWandoujia，将会打出豌豆荚渠道的release和debug版的包；
@@ -147,9 +148,104 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.+'
-    testCompile 'junit:junit:4.12'
-    compile project(':okhttp3')
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.github.Dkaishu:okhttp3:v1.0.0'
 
+    //tinker的核心库
+    compile('com.tencent.tinker:tinker-android-lib:1.8.0')
+
+    //多渠道示例
+//    binnanCompile project(':devModule')
+//    baiduCompile 'com.example.go:example:v1.0'
+
+    //Splash页以及轮播图
+    compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
+}
+
+//旧apk地址
+def bakPath = file("${buildDir}/old/binnan/binnan_1_debug.apk")
+
+tinkerPatch {
+    /**
+     * necessary，default 'null'
+     * the old apk path, use to diff with the new apk to build
+     * add apk from the build/bakApk
+     */
+    oldApk = "${bakPath}"
+    /**
+     * optional，default 'false'
+     * there are some cases we may get some warnings
+     * if ignoreWarning is true, we would just assert the patch process
+     * case 1: minSdkVersion is below 14, but you are using dexMode with raw.
+     *         it must be crash when load.
+     * case 2: newly added Android Component in AndroidManifest.xml,
+     *         it must be crash when load.
+     * case 3: loader classes in dex.loader{} are not keep in the main dex,
+     *         it must be let tinker not work.
+     * case 4: loader classes in dex.loader{} changes,
+     *         loader classes is ues to load patch dex. it is useless to change them.
+     *         it won't crash, but these changes can't effect. you may ignore it
+     * case 5: resources.arsc has changed, but we don't use applyResourceMapping to build
+     */
+    ignoreWarning = false
+
+    /**
+     * optional，default 'true'
+     * whether sign the patch file
+     * if not, you must do yourself. otherwise it can't check success during the patch loading
+     * we will use the sign config with your build type
+     */
+    useSign = true
+
+    /**
+     * optional，default 'true'
+     * whether use tinker to build
+     */
+    tinkerEnable = true
+
+    /**
+     * Warning, applyMapping will affect the normal android build!
+     */
+    buildConfig {
+        /**
+         * optional，default 'null'
+         * if we use tinkerPatch to build the patch apk, you'd better to apply the old
+         * apk mapping file if minifyEnabled is enable!
+         * Warning:
+         * you must be careful that it will affect the normal assemble build!
+         */
+//        applyMapping = getApplyMappingPath()
+        /**
+         * optional，default 'null'
+         * It is nice to keep the resource id from R.txt file to reduce java changes
+         */
+//        applyResourceMapping = getApplyResourceMappingPath()
+
+        /**
+         * necessary，default 'null'
+         * because we don't want to check the base apk with md5 in the runtime(it is slow)
+         * tinkerId is use to identify the unique base apk when the patch is tried to apply.
+         * we can use git rev, svn rev or simply versionCode.
+         * we will gen the tinkerId in your manifest automatic
+         */
+        //Todo productFlavors 配置
+        tinkerId = rootProject.ext.versionCode
+
+        /**
+         * if keepDexApply is true, class in which dex refer to the old apk.
+         * open this can reduce the dex diff file size.
+         */
+        keepDexApply = false
+
+        /**
+         * optional, default 'false'
+         * Whether tinker should treat the base apk as the one being protected by app
+         * protection tools.
+         * If this attribute is true, the generated patch package will contain a
+         * dex including all changed classes instead of any dexdiff patch-info files.
+         */
+        isProtectedApp = false
+    }
 }

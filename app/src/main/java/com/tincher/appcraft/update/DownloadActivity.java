@@ -40,6 +40,11 @@ public class DownloadActivity extends BaseActivity {
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }

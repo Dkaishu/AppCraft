@@ -6,13 +6,17 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        //tinker 热更新
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.8.0')
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url 'https://jitpack.io' }
+        // to use support library  through Google's Maven repository
+        maven { url "https://maven.google.com" }
     }
 }
 
@@ -21,7 +25,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    //t通常工程下会有多个module，这里统一配置其gradle
+    //t通常工程下会有多个module，这里统一配置
     compileSdkVersion = 26
     buildToolsVersion = "25.0.3"
 

@@ -21,4 +21,9 @@ public class ExampleActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
 }

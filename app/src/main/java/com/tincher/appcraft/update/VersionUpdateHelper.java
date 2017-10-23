@@ -43,8 +43,12 @@ public class VersionUpdateHelper implements ServiceConnection {
         void callBack(int code);
     }
 
-    public VersionUpdateHelper(Context context) {
+    private VersionUpdateHelper(Context context) {
         this.context = context;
+    }
+    public static VersionUpdateHelper create(Context context){
+        return new VersionUpdateHelper(context);
+
     }
 
     public void setCheckCallBack(CheckCallBack checkCallBack) {
@@ -243,9 +247,9 @@ public class VersionUpdateHelper implements ServiceConnection {
                 if (progressDialog != null) {
                     progressDialog.setMax(100);
                     progressDialog.setProgress(percent);
-                    LogUtil.e("+++", String.valueOf(percent));
+                    LogUtil.d("+++", String.valueOf(percent));
                 }
-                LogUtil.e("+555+", String.valueOf(percent));
+                LogUtil.d("+555+", String.valueOf(percent));
 
             }
 

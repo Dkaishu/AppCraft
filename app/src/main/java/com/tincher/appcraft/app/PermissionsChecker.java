@@ -39,7 +39,7 @@ public class PermissionsChecker {
                     || ActivityCompat.shouldShowRequestPermissionRationale(
                     context, perm)) {
                 needRequestPermissionList.add(perm);
-                LogUtil.e("",perm);
+                LogUtil.d("",perm);
             }
         }
         return needRequestPermissionList;

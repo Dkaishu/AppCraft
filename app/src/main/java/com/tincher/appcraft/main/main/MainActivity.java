@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
+import com.tincher.appcraft.update.UpdateManager;
 import com.tincher.appcraft.update.VersionUpdateHelper;
 
 import butterknife.Bind;
@@ -37,12 +38,13 @@ public class MainActivity extends BaseActivity {
 //                UpdateManager updateManager = new UpdateManager();
 //                updateManager.update(this);
 //                sta();
+                UpdateManager.create().optionalUpdate();
                 break;
             case R.id.bt_download:
 //                startActivity(new Intent(MainActivity.this, DownloadActivity.class));
-                VersionUpdateHelper helper= new VersionUpdateHelper(this);
+//                VersionUpdateHelper helper= new VersionUpdateHelper(this);
 //                helper.startForceUpdateVersion();
-                helper.startOptionalUpdateVersion();
+                VersionUpdateHelper.create(this).startOptionalUpdateVersion();
                 break;
         }
     }

@@ -57,13 +57,13 @@ public class VersionUpdateService extends Service {
 
         String url = intent.getStringExtra("url");
         String saveFileName = intent.getStringExtra("saveFileName");
-        LogUtil.e(TAG, "onStartCommand  " + url + "    name：  " + saveFileName);
+        LogUtil.d(TAG, "onStartCommand  " + url + "    name：  " + saveFileName);
 
         if (!TextUtils.isEmpty(url) && !TextUtils.isEmpty(saveFileName)) {
             doDownLoadTask(url, saveFileName);
 
             isForceUpdate = false;
-            LogUtil.e(TAG, "onStartCommand  ");
+            LogUtil.d(TAG, "onStartCommand  ");
         }
         return START_REDELIVER_INTENT;
     }
@@ -243,11 +243,11 @@ public class VersionUpdateService extends Service {
                         if (isForceUpdate&&downloadStatus.equals(DownloadStatus.PAUSE)) downLoadListener.pause();
                         if (downloadStatus.equals(DownloadStatus.COMPLETED)) {
                             if (isForceUpdate)downLoadListener.downloadSuccess(filePath);
-                            LogUtil.e(TAG,"filePath::"+info.getDownloadFiles().get(0).getSaveFileDir());
+                            LogUtil.d(TAG,"filePath::"+info.getDownloadFiles().get(0).getSaveFileDir());
 
                             String dir = info.getDownloadFiles().get(0).getSaveFileDir();
                             String name  = info.getDownloadFiles().get(0).getSaveFileName();
-                            LogUtil.e(TAG,"fileName::"+name);
+                            LogUtil.d(TAG,"fileName::"+name);
                             installApk(new File(dir,name), VersionUpdateService.this);
                             stopSelf();
                         }
@@ -259,7 +259,7 @@ public class VersionUpdateService extends Service {
                 }
             });
             if (!TextUtils.isEmpty(saveFileDir)) fileInfo.setSaveFileDir(saveFileDir);
-            LogUtil.e(TAG, "saveFileDir" + saveFileDir);
+            LogUtil.d(TAG, "saveFileDir" + saveFileDir);
         }
 
 

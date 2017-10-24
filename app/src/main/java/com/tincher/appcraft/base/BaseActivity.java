@@ -38,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private NetworkStateListener networkStateListener;
 
     protected abstract int initLayout();
+
     protected abstract void initView();
 
     @Override
@@ -47,15 +48,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
         initNetworkStateListener();
-
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(isNeedCheckPermission){
-            PermissionsChecker.checkPermissions(this,PERMISSION_REQUEST_CODE,PermissionConfig.permissions);
+        if (isNeedCheckPermission) {
+            PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, PermissionConfig.permissions);
         }
 
     }
@@ -71,6 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onPause();
 
     }
+
     @Override
     protected void onDestroy() {
         ButterKnife.unbind(this);
@@ -80,7 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         }
         //
-        if (mService!=null&&mService.isDownLoading()){
+        if (mService != null && mService.isDownLoading()) {
             mService.onDestroy();
             unbindService(mConnection);
         }
@@ -111,7 +112,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void onNetworkState(boolean isNetworkAvailable, NetInfo netInfo) {
         //Todo 网络状态
-        if (!isNetworkAvailable) Toast.makeText(this,"Network is not available",Toast.LENGTH_LONG).show();
+        if (!isNetworkAvailable)
+            Toast.makeText(this, "Network is not available", Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -131,7 +133,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                                            String[] permissions, int[] paramArrayOfInt) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (!verifyPermissions(paramArrayOfInt)) {
-                LogUtil.e("",String.valueOf(paramArrayOfInt));
+                LogUtil.d("", String.valueOf(paramArrayOfInt));
                 showMissingPermissionDialog();
                 isNeedCheckPermission = false;
             }
@@ -166,7 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  启动应用的设置
+     * 启动应用的设置
      */
     private void startAppSettings() {
         Intent intent = new Intent(
@@ -186,9 +188,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private String fileName = "QQ8.9.1.exe";
 
 
-    private void checkUpdate(){
-        if (!NetworkUtil.isNetworkAvailable(this))return;
-        if (PrefUtil.getBoolean(this, PrefConfig.PREF_NEED_VERSION_UPDATE,false))showUpdateDialog();
+    private void checkUpdate() {
+        if (!NetworkUtil.isNetworkAvailable(this)) return;
+        if (PrefUtil.getBoolean(this, PrefConfig.PREF_NEED_VERSION_UPDATE, false))
+            showUpdateDialog();
     }
 
     private void showUpdateDialog() {
@@ -242,36 +245,31 @@ public abstract class BaseActivity extends AppCompatActivity {
             mService.setDownLoadListener(new DownloadService.DownloadListener() {
                 @Override
                 public void begain() {
-
-                    LogUtil.e(TAG, "update begain");
-
+                    LogUtil.d(TAG, "update begain");
                 }
 
                 @Override
                 public void pause() {
-                    LogUtil.e(TAG, "update pause");
-
+                    LogUtil.d(TAG, "update pause");
                 }
 
                 @Override
                 public void inProgress(int percent, long bytesWritten, long contentLength, boolean done) {
-                    LogUtil.e(TAG, "percent :  " + percent);
-
+                    LogUtil.d(TAG, "percent :  " + percent);
                 }
 
                 @Override
                 public void downloadSuccess(String filePath) {
-                    LogUtil.e(TAG, "downloadSuccess :  " + filePath);
-                    LogUtil.e(TAG, "mBound :  " + mBound);
+                    LogUtil.d(TAG, "downloadSuccess :  " + filePath);
+                    LogUtil.d(TAG, "mBound :  " + mBound);
                 }
 
                 @Override
                 public void downloadFailed(String err) {
-                    LogUtil.e(TAG, "downloadFailed :  " + err);
-
+                    LogUtil.d(TAG, "downloadFailed :  " + err);
                 }
             });
-            mService.download(url,fileName);
+            mService.download(url, fileName);
         }
     }
 }

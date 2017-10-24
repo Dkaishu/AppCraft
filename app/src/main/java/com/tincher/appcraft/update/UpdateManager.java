@@ -17,7 +17,11 @@ public class UpdateManager {
     private String url = "http://dldir1.qq.com/qqfile/qq/QQ8.9.1/20453/QQ8.9.1.exe";
     private String fileName = "QQ8.9.1.exe";
 
-    public UpdateManager() {
+    private UpdateManager() {
+    }
+
+    public static UpdateManager create() {
+        return new UpdateManager();
     }
 
     protected void onStart(Context mActivity) {
@@ -35,7 +39,7 @@ public class UpdateManager {
         }
     }
 
-    public void optionalUpdate(){
+    public void optionalUpdate() {
 
     }
 
@@ -50,34 +54,34 @@ public class UpdateManager {
                 @Override
                 public void begain() {
 
-                    LogUtil.e(TAG, "update begain");
+                    LogUtil.d(TAG, "update begain");
 
                 }
 
                 @Override
                 public void pause() {
-                    LogUtil.e(TAG, "update pause");
+                    LogUtil.d(TAG, "update pause");
 
                 }
 
                 @Override
                 public void inProgress(int percent, long bytesWritten, long contentLength, boolean done) {
-                    LogUtil.e(TAG, "percent :  " + percent);
+                    LogUtil.d(TAG, "percent :  " + percent);
 
                 }
 
                 @Override
                 public void downloadSuccess(String filePath) {
-                    LogUtil.e(TAG, "downloadSuccess :  " + filePath);
+                    LogUtil.d(TAG, "downloadSuccess :  " + filePath);
                     onStop(mActivity);
-                    LogUtil.e(TAG, "mBound :  " + mBound);
+                    LogUtil.d(TAG, "mBound :  " + mBound);
 
 
                 }
 
                 @Override
                 public void downloadFailed(String err) {
-                    LogUtil.e(TAG, "downloadFailed :  " + err);
+                    LogUtil.d(TAG, "downloadFailed :  " + err);
 
                 }
             });

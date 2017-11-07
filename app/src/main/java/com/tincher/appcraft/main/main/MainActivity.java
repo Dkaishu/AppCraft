@@ -1,11 +1,13 @@
 package com.tincher.appcraft.main.main;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
+import com.tincher.appcraft.main.example.activity.ExampleActivity;
 import com.tincher.appcraft.update.UpdateManager;
 import com.tincher.appcraft.update.VersionUpdateHelper;
 
@@ -18,6 +20,8 @@ public class MainActivity extends BaseActivity {
     TextView text;
     @Bind(R.id.bt_download)
     Button btDownload;
+    @Bind(R.id.bt_other)
+    Button btOther;
 
     @Override
     protected int initLayout() {
@@ -29,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.text, R.id.bt_download})
+    @OnClick({R.id.text, R.id.bt_download, R.id.bt_other})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text:
@@ -45,6 +49,9 @@ public class MainActivity extends BaseActivity {
 //                VersionUpdateHelper helper= new VersionUpdateHelper(this);
 //                helper.startForceUpdateVersion();
                 VersionUpdateHelper.create(this).startOptionalUpdateVersion();
+                break;
+            case R.id.bt_other:
+                startActivity(new Intent(this, ExampleActivity.class));
                 break;
         }
     }

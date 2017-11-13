@@ -19,6 +19,7 @@ android {
 
         //AndroidManifest 中 TEST_CHANNEL_VALUE默认值
         manifestPlaceholders = [TEST_CHANNEL_VALUE: "official"]
+        multiDexEnabled true
 
         ndk { abiFilters "armeabi" }
     }
@@ -137,7 +138,7 @@ android {
 
             //AndroidManifest 中 TEST_CHANNEL_VALUE默认值
             manifestPlaceholders = [TEST_CHANNEL_VALUE: "binnan_test"]
-            multiDexEnabled true
+//            multiDexEnabled true
         }
         baidu {}
 //        wandoujia {}
@@ -167,11 +168,14 @@ dependencies {
     //Splash页以及轮播图
     compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
     //zxing 扫码
-    compile 'com.google.zxing:core:3.3.0';
-    compile 'com.google.zxing:android-core:3.3.0';
+//    compile 'com.google.zxing:core:3.3.0';
+//    compile 'com.google.zxing:android-core:3.3.0';
     //持久化
     compile 'org.greenrobot:greendao:3.2.2'
-
+    //上拉刷新下拉加载
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //二维码
+    compile 'com.github.Dkaishu:ZXingLib:v1.0.1'
 }
 
 greendao {

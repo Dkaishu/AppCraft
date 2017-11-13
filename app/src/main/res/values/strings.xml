@@ -6,7 +6,8 @@
     <string name="dialog_permission_ok_setting">设置</string>
     <string name="dialog_permission_ok_cancel">取消</string>
 
+    <string name="dialog_update_notifyMsg">新版本</string>
     <string name="dialog_update_cancel">取消</string>
-    <string name="dialog_update_setting">设置</string>
+    <string name="dialog_update_setting">确定</string>
 
 </resources>

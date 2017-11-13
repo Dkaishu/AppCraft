@@ -17,8 +17,7 @@ public class AppContext extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-//        DBManager.init(this);
-        httpUtil.init(this);
+
     }
 
     @Override

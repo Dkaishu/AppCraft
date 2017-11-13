@@ -5,14 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -118,9 +123,74 @@ public class PhotoTools {
     /**
      * 通过文件选取图片
      */
-    public void slectPhoto(){
-        //Todo 通过文件选取图片
+    public void slectPhotoFromFile(Activity activity, int requestCode) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        intent.putExtra("return-data", true);
+        activity.startActivityForResult(intent, requestCode);
+
+//        Result:
+//        Uri uri = data.getData();
+//        String path = GalleryUtils.getPath(this, uri);
+//        String name = new File(path).getName();
+//
+//        if (name.endsWith("jpg") || name.endsWith("jpeg") || name.endsWith("png")) {
+//            try {
+//                bitmap = ImageTools.getMyImage(path);
+//                        /*ContentResolver cr = this.getContentResolver();
+//                        bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri)); // 此种写法加载大尺寸图片会显示空白*/
+//            } catch (OutOfMemoryError e) {
+//                ToastUtils.showShortToast(this, "图片太大，请选择其它图片");
+//                return;
+//            }
+//        }
     }
 
+    /**
+     * bitmap转为base64
+     *
+     * @param bitmap
+     * @return
+     */
+    public static String bitmapToBase64(Bitmap bitmap) {
+
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+                baos.flush();
+                baos.close();
+
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * base64转为bitmap
+     *
+     * @param base64Data
+     * @return
+     */
+    public static Bitmap base64ToBitmap(String base64Data) {
+        byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
 
 }

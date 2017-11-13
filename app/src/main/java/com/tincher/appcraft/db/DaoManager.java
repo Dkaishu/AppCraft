@@ -1,8 +1,9 @@
 package com.tincher.appcraft.db;
 
 import com.tincher.appcraft.app.AppContext;
-import com.tincher.appcraft.main.test.greendao.entity.DaoMaster;
-import com.tincher.appcraft.main.test.greendao.entity.DaoSession;
+import com.tincher.appcraft.db.entity.DaoMaster;
+import com.tincher.appcraft.db.entity.DaoSession;
+
 
 /**
  * Created by dks on 2017/11/7.

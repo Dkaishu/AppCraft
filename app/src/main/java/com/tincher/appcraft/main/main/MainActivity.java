@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
-import com.tincher.appcraft.main.example.activity.ExampleActivity;
+import com.tincher.appcraft.main.example.activity.DaoActivity;
 import com.tincher.appcraft.update.UpdateManager;
 import com.tincher.appcraft.update.VersionUpdateHelper;
 
@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
                 VersionUpdateHelper.create(this).startOptionalUpdateVersion();
                 break;
             case R.id.bt_other:
-                startActivity(new Intent(this, ExampleActivity.class));
+                startActivity(new Intent(this, DaoActivity.class));
                 break;
         }
     }

@@ -13,6 +13,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.VIBRATE" /><!--允许访问振动设备-->
 
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -47,9 +52,10 @@
         </activity>
         <activity android:name=".main.main.MainActivity"/>
 
-        <activity android:name=".main.example.activity.ExampleActivity"/>
+        <activity android:name=".main.example.activity.DaoActivity"/>
         <activity android:name=".update.DownloadActivity"/>
         <activity android:name=".update.DownloadBreakpointsActivity"/>
+        <activity android:name=".main.example.activity.ZxingActivity"/>
 
 
         <service android:name="com.tincher.appcraft.update.DownloadService"/>

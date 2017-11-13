@@ -6,7 +6,7 @@ import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
 import com.tincher.appcraft.db.DaoManager;
 import com.tincher.appcraft.db.entity.User;
-import com.tincher.appcraft.main.test.greendao.entity.UserDao;
+import com.tincher.appcraft.db.entity.UserDao;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import butterknife.Bind;
  * Created by Administrator on 2017/9/19.
  */
 
-public class ExampleActivity extends BaseActivity {
+public class DaoActivity extends BaseActivity {
 
     @Bind(R.id.text)
     TextView text;

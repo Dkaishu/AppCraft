@@ -1,6 +1,7 @@
 package com.tincher.appcraft.db;
 
-import com.tincher.appcraft.main.test.greendao.entity.UserDao;
+
+import com.tincher.appcraft.db.entity.UserDao;
 
 /**
  * Created by dks on 2017/11/7.

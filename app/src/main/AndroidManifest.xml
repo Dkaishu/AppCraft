@@ -3,24 +3,31 @@
     package="com.tincher.appcraft">
 
     <!-- 添加读写权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 访问互联网权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.VIBRATE" /><!--允许访问振动设备-->
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--ArcGIS    indicates that your app requires the OpenGL version 2.0 software feature for the app to run.-->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:name=".app.AppContext"
@@ -33,61 +40,66 @@
 
         <meta-data
             android:name="TEST_CHANNEL_VALUE"
-            android:value="${TEST_CHANNEL_VALUE}">
-        </meta-data>
+            android:value="${TEST_CHANNEL_VALUE}"></meta-data>
         <meta-data
             android:name="ALL_CHANNEL_VALUE"
-            android:value="${TEST_CHANNEL_VALUE}">
-        </meta-data>
+            android:value="${TEST_CHANNEL_VALUE}"></meta-data>
 
 
-        <activity android:name=".main.main.TestLaunchActivity1"
+        <activity
+            android:name=".main.main.TestLaunchActivity1"
             android:launchMode="singleTask">
+            <!--            <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".main.main.TestLaunchActivity2"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".main.main.TestLaunchActivity3"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".main.main.TestLaunchActivity4"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".main.main.ArcGISTestActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.main.TestLaunchActivity2"
-            android:launchMode="singleTask"
-            />
-        <activity android:name=".main.main.TestLaunchActivity3"
-            android:launchMode="singleTop"
-            />
-        <activity android:name=".main.main.TestLaunchActivity4"
-            android:launchMode="singleTop"
-            />
-
-
-
 
 
         <!--<activity android:name=".main.splash.activity.SplashActivity"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/AppTheme.Splash">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/AppTheme.Splash">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
         <!--</activity>-->
-        <activity android:name=".main.main.MainActivity"/>
+        <activity android:name=".main.main.MainActivity" />
 
-        <activity android:name=".main.example.activity.DaoActivity"/>
-        <activity android:name=".update.DownloadActivity"/>
-        <activity android:name=".update.DownloadBreakpointsActivity"/>
-        <activity android:name=".main.example.activity.ZxingActivity"/>
+        <activity android:name=".main.example.activity.DaoActivity" />
+        <activity android:name=".update.DownloadActivity" />
+        <activity android:name=".update.DownloadBreakpointsActivity" />
+        <activity android:name=".main.example.activity.ZxingActivity" />
 
 
-        <service android:name="com.tincher.appcraft.update.DownloadService"/>
-        <service android:name=".update.VersionUpdateService"/>
+        <service android:name="com.tincher.appcraft.update.DownloadService" />
+        <service android:name=".update.VersionUpdateService" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.tincher.appcraft.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <!--元数据-->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"

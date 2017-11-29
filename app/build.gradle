@@ -21,7 +21,7 @@ android {
         manifestPlaceholders = [TEST_CHANNEL_VALUE: "official"]
         multiDexEnabled true
 
-        ndk { abiFilters "armeabi" }
+        ndk { abiFilters "armeabi", "armeabi-v7a" }
     }
 
     //签名配置，用于在下面的 buildTypes 中引用：signingConfig signingConfigs.release，
@@ -176,6 +176,8 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     //二维码
     compile 'com.github.Dkaishu:ZXingLib:v1.0.1'
+    //ArcGIS
+    compile 'com.esri.arcgisruntime:arcgis-android:100.1.0'
 }
 
 greendao {

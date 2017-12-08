@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
-import com.tincher.appcraft.main.phoneinfotest.MyPhone;
 import com.tincher.appcraft.utils.DeviceUtils;
 
 import butterknife.Bind;
@@ -67,6 +66,27 @@ public class ModifyIdentifyTest extends BaseActivity {
     @Bind(R.id.bt_sim_IMSI)
     Button btSimIMSI;
 
+    @Bind(R.id.tv_LocalWIFIIpAdress)
+    TextView tvLocalWIFIIpAdress;
+    @Bind(R.id.tv_LocalWIFIIpAdress_modify)
+    TextView tvLocalWIFIIpAdressModify;
+    @Bind(R.id.bt_LocalWIFIIpAdress)
+    Button btLocalWIFIIpAdress;
+
+    @Bind(R.id.tv_GPRSLocalIpAddress)
+    TextView tvGPRSLocalIpAddress;
+    @Bind(R.id.tv_GPRSLocalIpAddress_modify)
+    TextView tvGPRSLocalIpAddressModify;
+    @Bind(R.id.bt_GPRSLocalIpAddress)
+    Button btGPRSLocalIpAddress;
+
+    @Bind(R.id.tv_other_default)
+    TextView tvOtherDefault;
+    @Bind(R.id.tv_other_modify)
+    TextView tvOtherModify;
+    @Bind(R.id.bt_other)
+    Button btOther;
+
     @Override
     protected int initLayout() {
         return R.layout.activity_test_modify_indentify;
@@ -81,13 +101,15 @@ public class ModifyIdentifyTest extends BaseActivity {
         tvPhoneDefault.setText(getPhoneNumber());
         tvSimIccidDefault.setText(getSimIccid());
         tvSimIMSIDefault.setText(getSimIMSI());
+        tvLocalWIFIIpAdress.setText(getLocalWIFIIpAdress());
+        tvGPRSLocalIpAddress.setText(getGPRSLocalIpAddress());
     }
-
 
 
     private String getImei(Context context) {
         return DeviceUtils.getIMEI(context).get(0);
     }
+
     private String getID() {
         return DeviceUtils.getAndroidID();
     }
@@ -95,41 +117,72 @@ public class ModifyIdentifyTest extends BaseActivity {
     private String getWifiMac() {
         return DeviceUtils.getMacAddress();
     }
-    private String getMacSSID(){
+
+    private String getMacSSID() {
         return DeviceUtils.getMacSSID();
     }
 
     private String getPhoneNumber() {
         return DeviceUtils.getPhoneNumber();
     }
+
     private String getSimIccid() {
         return DeviceUtils.getSimIccid();
     }
+
     private String getSimIMSI() {
         return DeviceUtils.getSimIMSI();
     }
 
+    private String getLocalWIFIIpAdress() {
+        return DeviceUtils.getWIFILocalIpAdress();
+    }
+
+    private String getGPRSLocalIpAddress() {
+        return DeviceUtils.getGPRSLocalIpAddress();
+    }
 
 
     @OnClick({R.id.bt_imei, R.id.bt_ID, R.id.bt_wifi_mac, R.id.bt_wifi_ssid, R.id.bt_phone, R.id.bt_sim_iccid, R.id.bt_sim_IMSI})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_imei:
-                MyPhone myPhone = new MyPhone();
-                myPhone.MyPhoneIn();
+                tvImeiDefault.setText(getImei(this));
+
                 break;
             case R.id.bt_ID:
+                tvIDDefault.setText(getID());
+
                 break;
             case R.id.bt_wifi_mac:
+                tvWifiMacDefault.setText(getWifiMac());
+
                 break;
             case R.id.bt_wifi_ssid:
+                tvWifiSsidDefault.setText(getMacSSID());
+
                 break;
             case R.id.bt_phone:
+                tvPhoneDefault.setText(getPhoneNumber());
+
                 break;
             case R.id.bt_sim_iccid:
+                tvSimIccidDefault.setText(getSimIccid());
+
                 break;
             case R.id.bt_sim_IMSI:
+                tvSimIMSIDefault.setText(getSimIMSI());
+
+                break;
+            case R.id.bt_LocalWIFIIpAdress:
+                tvLocalWIFIIpAdress.setText(getLocalWIFIIpAdress());
+                break;
+            case R.id.bt_GPRSLocalIpAddress:
+                tvGPRSLocalIpAddress.setText(getGPRSLocalIpAddress());
+                break;
+            case R.id.bt_other:
                 break;
         }
     }
+
 }

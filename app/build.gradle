@@ -21,7 +21,7 @@ android {
         manifestPlaceholders = [TEST_CHANNEL_VALUE: "official"]
         multiDexEnabled true
 
-        ndk { abiFilters "armeabi", "armeabi-v7a" }
+//        ndk { abiFilters "armeabi", "armeabi-v7a" }
     }
 
     //签名配置，用于在下面的 buildTypes 中引用：signingConfig signingConfigs.release，
@@ -158,19 +158,16 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.Dkaishu:okhttp3:v1.0.0'
-
     //tinker的核心库
-    compile('com.tencent.tinker:tinker-android-lib:1.8.0')
-
+    compile 'com.tencent.tinker:tinker-android-lib:1.8.0'
     //多渠道示例
-//    binnanCompile project(':devModule')
-//    baiduCompile 'com.example.go:example:v1.0'
-
+    //    binnanCompile project(':devModule')
+    //    baiduCompile 'com.example.go:example:v1.0'
     //Splash页以及轮播图
     compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
     //zxing 扫码
-//    compile 'com.google.zxing:core:3.3.0';
-//    compile 'com.google.zxing:android-core:3.3.0';
+    //    compile 'com.google.zxing:core:3.3.0';
+    //    compile 'com.google.zxing:android-core:3.3.0';
     //持久化
     compile 'org.greenrobot:greendao:3.2.2'
     //上拉刷新下拉加载

@@ -15,13 +15,17 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -403,5 +407,68 @@ public final class DeviceUtils {
      */
     public static void reboot2Bootloader() {
         ShellUtils.execCmd("reboot bootloader", true);
+    }
+
+
+    /**
+     * 使用WIFI时，获取本机IP地址
+     */
+
+    public static String getWIFILocalIpAdress() {
+
+        //获取wifi服务
+        @SuppressLint("WifiManagerLeak")
+        WifiManager wifiManager = (WifiManager) Utils.getApp().getSystemService(Context.WIFI_SERVICE);
+
+//        WifiManager wifiManager = (WifiManager) Utils.getApp().getSystemService(Context.WIFI_SERVICE);
+        //判断wifi是否开启
+        if (!wifiManager.isWifiEnabled()) {
+            wifiManager.setWifiEnabled(true);
+        }
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        int ipAddress = wifiInfo.getIpAddress();
+        String BSSID = wifiInfo.getBSSID();
+        int NetworkId = wifiInfo.getNetworkId();
+        boolean HiddenSSID = wifiInfo.getHiddenSSID();
+        int Rssi = wifiInfo.getRssi();
+
+        String ip = formatIpAddress(ipAddress);
+        return ip;
+    }
+
+    private static String formatIpAddress(int ipAdress) {
+
+        return (ipAdress & 0xFF) + "." +
+                ((ipAdress >> 8) & 0xFF) + "." +
+                ((ipAdress >> 16) & 0xFF) + "." +
+                (ipAdress >> 24 & 0xFF);
+    }
+
+    /**
+     * 使用GPRS时，获取本机IP地址
+     *
+     * @return
+     */
+    public static String getGPRSLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface
+                    .getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf
+                        .getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()&&!inetAddress.isLinkLocalAddress()) {
+                        return inetAddress.getHostAddress().toString();//Ipv4
+                    }
+                    if (!inetAddress.isLoopbackAddress()) {
+                        String Ipv6 =  inetAddress.getHostAddress().toString();//Ipv6
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+            Log.e("Wifi IpAddress", ex.toString());
+        }
+        return null;
     }
 }

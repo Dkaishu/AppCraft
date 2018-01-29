@@ -15,8 +15,8 @@ public class DaoManager {
     private DaoSession mDaoSession;
 
     private DaoManager() {
-        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(AppContext.getInstance()
-                .getApplicationContext(), "my-db", null);
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(
+                AppContext.context, "my-db", null);
         DaoMaster mDaoMaster = new DaoMaster(devOpenHelper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
     }

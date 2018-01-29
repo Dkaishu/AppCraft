@@ -1,17 +1,23 @@
 package com.tincher.appcraft.app;
 
 
-import com.tincher.appcraft.base.BaseApplication;
-import com.tincher.appcraft.net.httpUtil;
+import android.app.Application;
+import android.content.Context;
 
 /**
- * 全局应用程序类
- * 用于基本配置，初始三方框架
- * 分两层 BaseApplication 是基于扩展性的考虑
+ * ApplicationContext
  */
-public class AppContext extends BaseApplication {
-    public static final int PAGE_SIZE = 20;// 默认分页大小
+public class AppContext {
+    public static Application application = null;
+    public static Context context = null;
+
+   /* public static final int PAGE_SIZE = 20;// 默认分页大小
     private static AppContext instance;
+
+    public AppContext(Application application, int tinkerFlags, boolean tinkerLoadVerifyFlag,
+                           long applicationStartElapsedTime, long applicationStartMillisTime, Intent tinkerResultIntent) {
+        super(application, tinkerFlags, tinkerLoadVerifyFlag, applicationStartElapsedTime, applicationStartMillisTime, tinkerResultIntent);
+    }
 
     @Override
     public void onCreate() {
@@ -25,15 +31,15 @@ public class AppContext extends BaseApplication {
         super.onTerminate();
     }
 
-    /**
+    *//**
      * 获得当前app运行的AppContext
      *
      * @return AppContext
-     */
+     *//*
     public static AppContext getInstance() {
         return instance;
     }
-
+*/
 /*
     public Properties getProperties() {
         return AppConfig.getAppConfig(this).get();

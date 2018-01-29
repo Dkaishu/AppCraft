@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         //tinker 热更新
-        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.8.0')
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.1')
         //greendao 持久化
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
@@ -44,4 +44,6 @@ ext {
 
     versionCode = 1
     versionName = "1.0"
+
+    javaVersion = JavaVersion.VERSION_1_7
 }

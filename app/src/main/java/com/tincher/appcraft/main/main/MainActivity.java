@@ -37,15 +37,15 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text:
-//                startActivity(new Intent(MainActivity.this, DownloadBreakpointsActivity.class));
-//                startService(new Intent(MainActivity.this, DownloadService.class));
+//                startActivity(new Intent(StartVpnActivity.this, DownloadBreakpointsActivity.class));
+//                startService(new Intent(StartVpnActivity.this, DownloadService.class));
 //                UpdateManager updateManager = new UpdateManager();
 //                updateManager.update(this);
 //                sta();
                 UpdateManager.create().optionalUpdate();
                 break;
             case R.id.bt_download:
-//                startActivity(new Intent(MainActivity.this, DownloadActivity.class));
+//                startActivity(new Intent(StartVpnActivity.this, DownloadActivity.class));
 //                VersionUpdateHelper helper= new VersionUpdateHelper(this);
 //                helper.startForceUpdateVersion();
                 VersionUpdateHelper.create(this).startOptionalUpdateVersion();

@@ -140,7 +140,7 @@ public class VersionUpdateService extends Service {
         CharSequence text = "下载中,请稍后...";
         // The PendingIntent to launch our activity if the user selects this notification
 //        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-//                new Intent(this, MainActivity.class), 0);
+//                new Intent(this, StartVpnActivity.class), 0);
         notificationBuilder = new Notification.Builder(this);
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);  // the status icon
         notificationBuilder.setTicker(text);  // the status text

@@ -41,6 +41,9 @@ android {
         debug {
             // No debug config
 //            storeFile file("${rootDir}/keystores/xqsg_debug.jks") //debug证书
+
+            storeFile file("./keystore/debug.keystore")
+
         }
 
         release {
@@ -48,6 +51,14 @@ android {
 //            storePassword "test"                            //签名证书密码
 //            keyAlias "test"                                 //别名
 //            keyPassword "test"                              //别名密码
+            try {
+                storeFile file("./keystore/release.keystore")
+                storePassword "testres"
+                keyAlias "testres"
+                keyPassword "testres"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
         }
     }
 
@@ -191,9 +202,9 @@ dependencies {
     //需要multidex
     compile "com.android.support:multidex:1.0.1"
     //optional, help to generate the final application
-    provided('com.tencent.tinker:tinker-android-anno:1.9.1')
+    provided('com.tencent.tinker:tinker-android-anno:1.9.2')
     //tinker's main Android lib
-    compile('com.tencent.tinker:tinker-android-lib:1.9.1')
+    compile('com.tencent.tinker:tinker-android-lib:1.9.2')
 }
 
 greendao {
@@ -292,7 +303,7 @@ if (buildWithTinker()) {
          *         it won't crash, but these changes can't effect. you may ignore it
          * case 5: resources.arsc has changed, but we don't use applyResourceMapping to build
          */
-        ignoreWarning = false
+        ignoreWarning = true
 
         /**
          * optional，default 'true'
@@ -464,7 +475,7 @@ if (buildWithTinker()) {
     }
 
     List<String> flavors = new ArrayList<>();
-    project.android.productFlavors.each {flavor ->
+    project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }
     boolean hasFlavors = flavors.size() > 0

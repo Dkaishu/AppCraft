@@ -5,7 +5,6 @@ package com.tincher.appcraft.config;
  */
 
 public class PrefConfig {
-    public static final String PREF_NAME = "com.tincher.appcraft";
-    public static final String PREF_NEED_VERSION_UPDATE = "needVersionUpdate";
-
+    public static final String PREF_NAME                    = "com.tincher.appcraft";
+    public static final String PREF_NEED_VERSION_UPDATE     = "needVersionUpdate";
 }

@@ -204,9 +204,9 @@ greendao {
 }
 
 /**
- * *********************以下是 tinker 的配置*******************************************************
+ * *********************以下是 tinker 的脚本配置*******************************************************
  */
-def bakPath = file("${buildDir}/bakApk/")
+def bakPath = file("${rootDir}/hotfix/")
 
 /**
  * you can use assembleRelease to build you base apk
@@ -540,7 +540,10 @@ if (buildWithTinker()) {
                     def preAssembleTask = tasks.getByName("process${flavor.capitalize()}DebugManifest")
                     preAssembleTask.doFirst {
                         String flavorName = preAssembleTask.name.substring(7, 8).toLowerCase() + preAssembleTask.name.substring(8, preAssembleTask.name.length() - 13)
-                        project.tinkerPatch.oldApk = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug.apk"
+//                        def fileName = "${variant.productFlavors[0].name}_${defaultConfig.versionCode}_debug.apk"
+//                        output.outputFile = new File(outputFile.parent + "/${variant.productFlavors[0].name}/", fileName)
+//                        project.tinkerPatch.oldApk = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug.apk"
+                        project.tinkerPatch.oldApk = "${originOldPath}/${flavorName}/${flavorName}_${rootProject.ext.versionCode}_debug.apk"
                         project.tinkerPatch.buildConfig.applyMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug-mapping.txt"
                         project.tinkerPatch.buildConfig.applyResourceMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug-R.txt"
                     }

@@ -1,6 +1,7 @@
 package com.tincher.appcraft.db;
 
-import com.tincher.appcraft.app.AppContext;
+import android.content.Context;
+
 import com.tincher.appcraft.db.entity.DaoMaster;
 import com.tincher.appcraft.db.entity.DaoSession;
 
@@ -14,9 +15,9 @@ public class DaoManager {
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
 
-    private DaoManager() {
+    private DaoManager(Context context) {
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(
-                AppContext.context, "my-db", null);
+               context, "my-db", null);
         DaoMaster mDaoMaster = new DaoMaster(devOpenHelper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
     }
@@ -29,9 +30,9 @@ public class DaoManager {
         return mDaoSession;
     }
 
-    public static DaoManager getInstance() {
+    public static DaoManager getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new DaoManager();
+            mInstance = new DaoManager(context);
         }
         return mInstance;
     }

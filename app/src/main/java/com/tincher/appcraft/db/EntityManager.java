@@ -1,6 +1,8 @@
 package com.tincher.appcraft.db;
 
 
+import android.content.Context;
+
 import com.tincher.appcraft.db.entity.UserDao;
 
 /**
@@ -16,8 +18,8 @@ public class EntityManager {
      *
      * @return
      */
-    public UserDao getUserDao() {
-        userDao = DaoManager.getInstance().getSession().getUserDao();
+    public UserDao getUserDao(Context context) {
+        userDao = DaoManager.getInstance(context).getSession().getUserDao();
         return userDao;
     }
 

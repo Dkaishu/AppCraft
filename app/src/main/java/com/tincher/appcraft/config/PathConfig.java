@@ -8,7 +8,6 @@ import android.os.Environment;
 
 public class PathConfig {
 
-    public static final String DOWNLOAD_FILE_DIR = Environment.getExternalStorageDirectory().getPath()+"/okHttp_download/";
-    public static final String CACHE_DIR = Environment.getExternalStorageDirectory().getPath()+"/okHttp_cache";
-
+    public static final String DOWNLOAD_FILE_DIR = Environment.getExternalStorageDirectory().getPath() + "/okHttp_download/";
+    public static final String CACHE_DIR         = Environment.getExternalStorageDirectory().getPath() + "/okHttp_cache";
 }

@@ -29,8 +29,7 @@ public class DaoActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-
-        UserDao userDao = DaoManager.getInstance().getSession().getUserDao();
+        UserDao userDao = DaoManager.getInstance(this).getSession().getUserDao();
         User user = new User();
         user.setName("zhang");
         user.setRepos(66);

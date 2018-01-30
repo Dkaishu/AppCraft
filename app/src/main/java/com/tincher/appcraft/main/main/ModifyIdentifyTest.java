@@ -29,63 +29,63 @@ public class ModifyIdentifyTest extends BaseActivity {
     @Bind(R.id.tv_ID_modify)
     TextView tvIDModify;
     @Bind(R.id.bt_ID)
-    Button btID;
+    Button   btID;
 
     @Bind(R.id.tv_wifi_mac_default)
     TextView tvWifiMacDefault;
     @Bind(R.id.tv_wifi_mac_modify)
     TextView tvWifiMacModify;
     @Bind(R.id.bt_wifi_mac)
-    Button btWifiMac;
+    Button   btWifiMac;
 
     @Bind(R.id.tv_wifi_ssid_default)
     TextView tvWifiSsidDefault;
     @Bind(R.id.tv_wifi_ssid_modify)
     TextView tvWifiSsidModify;
     @Bind(R.id.bt_wifi_ssid)
-    Button btWifiSsid;
+    Button   btWifiSsid;
 
     @Bind(R.id.tv_phone_default)
     TextView tvPhoneDefault;
     @Bind(R.id.tv_phone_modify)
     TextView tvPhoneModify;
     @Bind(R.id.bt_phone)
-    Button btPhone;
+    Button   btPhone;
 
     @Bind(R.id.tv_sim_iccid_default)
     TextView tvSimIccidDefault;
     @Bind(R.id.tv_sim_iccid_modify)
     TextView tvSimIccidModify;
     @Bind(R.id.bt_sim_iccid)
-    Button btSimIccid;
+    Button   btSimIccid;
 
     @Bind(R.id.tv_sim_IMSI_default)
     TextView tvSimIMSIDefault;
     @Bind(R.id.tv_sim_IMSI_modify)
     TextView tvSimIMSIModify;
     @Bind(R.id.bt_sim_IMSI)
-    Button btSimIMSI;
+    Button   btSimIMSI;
 
     @Bind(R.id.tv_LocalWIFIIpAdress)
     TextView tvLocalWIFIIpAdress;
     @Bind(R.id.tv_LocalWIFIIpAdress_modify)
     TextView tvLocalWIFIIpAdressModify;
     @Bind(R.id.bt_LocalWIFIIpAdress)
-    Button btLocalWIFIIpAdress;
+    Button   btLocalWIFIIpAdress;
 
     @Bind(R.id.tv_GPRSLocalIpAddress)
     TextView tvGPRSLocalIpAddress;
     @Bind(R.id.tv_GPRSLocalIpAddress_modify)
     TextView tvGPRSLocalIpAddressModify;
     @Bind(R.id.bt_GPRSLocalIpAddress)
-    Button btGPRSLocalIpAddress;
+    Button   btGPRSLocalIpAddress;
 
     @Bind(R.id.tv_other_default)
     TextView tvOtherDefault;
     @Bind(R.id.tv_other_modify)
     TextView tvOtherModify;
     @Bind(R.id.bt_other)
-    Button btOther;
+    Button   btOther;
 
     @Override
     protected int initLayout() {

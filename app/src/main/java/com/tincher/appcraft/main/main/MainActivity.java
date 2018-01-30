@@ -19,9 +19,9 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.text)
     TextView text;
     @Bind(R.id.bt_download)
-    Button btDownload;
+    Button   btDownload;
     @Bind(R.id.bt_other)
-    Button btOther;
+    Button   btOther;
 
     @Override
     protected int initLayout() {

@@ -93,11 +93,11 @@
         <activity
             android:name=".main.main.ModifyIdentifyTest"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".main.customviewdemo.multi_select.MultiSelectMunuActivity"
@@ -119,7 +119,13 @@
         <!--<category android:name="android.intent.category.LAUNCHER" />-->
         <!--</intent-filter>-->
         <!--</activity>-->
-        <activity android:name=".main.main.MainActivity" />
+        <activity android:name=".main.main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".main.example.activity.DaoActivity" />
         <activity android:name=".update.DownloadActivity" />
@@ -145,12 +151,12 @@
         <!--讯飞广告-->
         <service
 
-            android:name="com.iflytek.voiceads.update.DownloadService"/>
+            android:name="com.iflytek.voiceads.update.DownloadService" />
 
         <activity
             android:name="com.iflytek.voiceads.request.IFLYBrowser"
 
-            android:screenOrientation="portrait"  />
+            android:screenOrientation="portrait" />
         <!--android:authorities="packagename.fileProvider"-->
         <provider
             android:name="android.support.v4.content.FileProvider"

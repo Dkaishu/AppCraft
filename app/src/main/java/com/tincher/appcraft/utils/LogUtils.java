@@ -53,7 +53,6 @@ public final class LogUtils {
      * 示例
      */
 /*
-
         //自定义配置
         public void initLog() {
             LogUtils.Config config = LogUtils.getConfig()

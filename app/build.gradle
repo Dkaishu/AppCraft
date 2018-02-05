@@ -216,13 +216,17 @@ greendao {
 
 /**
  * *********************以下是 tinker 的脚本配置*******************************************************
+ * https://github.com/Tencent/tinker/wiki/Tinker-%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
  */
 def bakPath = file("${rootDir}/hotfix/")
+def buildPath = file("${rootDir}/outputs")
 
 /**
  * you can use assembleRelease to build you base apk
  * use tinkerPatchRelease -POLD_APK=  -PAPPLY_MAPPING=  -PAPPLY_RESOURCE= to build patch
  * add apk from the build/bakApk
+ *
+ * gradlew tinkerPatchBinnanDebug
  */
 ext {
     //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?
@@ -230,14 +234,14 @@ ext {
 
     //for normal build
     //old apk file to build patch apk  app-0129-15-38-32\binnan
-    tinkerOldApkPath = "${bakPath}/app-0129-15-38-32/binnan/binnan_1_debug.apk"
+    tinkerOldApkPath = "${bakPath}/app-0205-16-42-28/binnan/binnan_1_debug.apk"
     //proguard mapping file to build patch apk
     tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
     //resource R.txt to build patch apk, must input if there is resource changed
-    tinkerApplyResourcePath = "${bakPath}/app-0129-15-38-32/binnan/app-binnan-debug-R.txt"
+    tinkerApplyResourcePath = "${bakPath}/binnan/app-binnan-debug-R.txt"
 
-    //only use for build all flavor, if not, just ignore this field
-    tinkerBuildFlavorDirectory = "${bakPath}/app-0129-15-38-32"
+    //only use for build all flavor, if not, just ignore this field //多flavor 仅仅需要配置此项
+    tinkerBuildFlavorDirectory = "${bakPath}/app-0205-16-42-28"
 //    D:\myTest\oschina-android-app-v2.8.8\AppCraft\app\build\bakApk\app-0129-15-38-32
 }
 

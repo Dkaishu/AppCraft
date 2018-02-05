@@ -1,15 +1,16 @@
 package com.tincher.appcraft.main.main;
 
-import android.content.Intent;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.tencent.tinker.lib.tinker.Tinker;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
-import com.tincher.appcraft.main.example.activity.DaoActivity;
 import com.tincher.appcraft.update.UpdateManager;
-import com.tincher.appcraft.update.VersionUpdateHelper;
+import com.tincher.appcraft.utils.LogUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -31,6 +32,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        text.setText("加载后");
+
     }
 
     @OnClick({R.id.text, R.id.bt_download, R.id.bt_other})
@@ -48,10 +51,15 @@ public class MainActivity extends BaseActivity {
 //                startActivity(new Intent(StartVpnActivity.this, DownloadActivity.class));
 //                VersionUpdateHelper helper= new VersionUpdateHelper(this);
 //                helper.startForceUpdateVersion();
-                VersionUpdateHelper.create(this).startOptionalUpdateVersion();
+//                VersionUpdateHelper.create(this).startOptionalUpdateVersion();
+                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+                LogUtils.e(Environment.getExternalStorageDirectory().getAbsolutePath());
+
                 break;
             case R.id.bt_other:
-                startActivity(new Intent(this, DaoActivity.class));
+//                startActivity(new Intent(this, DaoActivity.class));
+                Tinker.with(getApplicationContext()).cleanPatch();
+
                 break;
         }
     }

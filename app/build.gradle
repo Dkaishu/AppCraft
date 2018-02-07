@@ -241,7 +241,7 @@ ext {
     tinkerApplyResourcePath = "${bakPath}/binnan/app-binnan-debug-R.txt"
 
     //only use for build all flavor, if not, just ignore this field //多flavor 仅仅需要配置此项
-    tinkerBuildFlavorDirectory = "${bakPath}/app-0205-16-42-28"
+    tinkerBuildFlavorDirectory = "${bakPath}/app-0207-08-16-45"
 //    D:\myTest\oschina-android-app-v2.8.8\AppCraft\app\build\bakApk\app-0129-15-38-32
 }
 

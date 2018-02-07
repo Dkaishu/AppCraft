@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        text.setText("我是加载前");
+        text.setText("我是加载后");
 
     }
 

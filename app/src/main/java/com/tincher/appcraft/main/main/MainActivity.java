@@ -7,10 +7,12 @@ import android.widget.TextView;
 
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
+import com.tincher.appcraft.BuildConfig;
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
 import com.tincher.appcraft.update.UpdateManager;
 import com.tincher.appcraft.utils.LogUtils;
+import com.tincher.appcraft.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -54,6 +56,7 @@ public class MainActivity extends BaseActivity {
 //                VersionUpdateHelper.create(this).startOptionalUpdateVersion();
                 TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
                 LogUtils.e(Environment.getExternalStorageDirectory().getAbsolutePath());
+                ToastUtils.showShort(BuildConfig.GITSHA);
 
                 break;
             case R.id.bt_other:

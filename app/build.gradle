@@ -32,7 +32,7 @@ android {
 
 //        ndk { abiFilters "armeabi", "armeabi-v7a" }
 
-        buildConfigField "String", "TINKER_ID", "\"${getTinkerIdValue()}\""
+        buildConfigField "String", "TINKER_ID", "\"${getTinkerIdValue()}\""//即 git sha
     }
 
     //签名配置，用于在下面的 buildTypes 中引用：signingConfig signingConfigs.release，
@@ -153,6 +153,8 @@ android {
         binnan {
             applicationId "com.tincher.appcraft"
 
+            buildConfigField "String", "GITSHA", "\"${gitSha()}\""  // git sha
+
 //            minSdkVersion rootProject.ext.minSdkVersion
 //            targetSdkVersion rootProject.ext.targetSdkVersion
 //            versionCode rootProject.ext.versionCode
@@ -217,6 +219,19 @@ greendao {
 /**
  * *********************以下是 tinker 的脚本配置*******************************************************
  * https://github.com/Tencent/tinker/wiki/Tinker-%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
+ *
+ * 使用指南：
+ *
+ *  要打指定版本与当前版本的patch需要：
+ *  1.找到指定版本的 tinkerOldApkPath，tinkerApplyMappingPath，tinkerApplyResourcePath，并在下方配置。若未混淆则不用
+ *  配置tinkerApplyMappingPath,若是使用 Flavors 多渠道打包，仅需要配置tinkerBuildFlavorDirectory一相即可；
+ *  2.Terminal 执行 相应的patch命令 ，如 gradlew tinkerPatchBinnanDebug ，等待编译完成即可在build/outputs/thinkerpatch 目录下找到相应文件。
+ *
+ * Android端加载patch：
+ * 1.将patch文件下载到本地目录, patch .apk 文件路径记为 patchLocation
+ * 2.恰当时机调用TinkerInstaller.onReceiveUpgradePatch(context，patchLocation)，重启应用即可完成热修复，成功率95%以上。
+ *
+ *
  */
 def bakPath = file("${rootDir}/hotfix/")
 def buildPath = file("${rootDir}/outputs")
@@ -241,7 +256,7 @@ ext {
     tinkerApplyResourcePath = "${bakPath}/binnan/app-binnan-debug-R.txt"
 
     //only use for build all flavor, if not, just ignore this field //多flavor 仅仅需要配置此项
-    tinkerBuildFlavorDirectory = "${bakPath}/app-0207-08-16-45"
+    tinkerBuildFlavorDirectory = "${bakPath}/app-0207-08-23-26"
 //    D:\myTest\oschina-android-app-v2.8.8\AppCraft\app\build\bakApk\app-0129-15-38-32
 }
 
@@ -562,9 +577,11 @@ if (buildWithTinker()) {
                         project.tinkerPatch.buildConfig.applyMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug-mapping.txt"
                         project.tinkerPatch.buildConfig.applyResourceMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug-R.txt"
                     }
-
                 }
             }
         }
     }
+    /**
+     ***********************以上是 tinker 的脚本配置*******************************************************
+     */
 }

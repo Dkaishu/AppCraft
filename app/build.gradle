@@ -224,8 +224,8 @@ greendao {
  *
  *  要打指定版本与当前版本的patch需要：
  *  1.找到指定版本的 tinkerOldApkPath，tinkerApplyMappingPath，tinkerApplyResourcePath，并在下方配置。若未混淆则不用
- *  配置tinkerApplyMappingPath,若是使用 Flavors 多渠道打包，仅需要配置tinkerBuildFlavorDirectory一相即可；
- *  2.Terminal 执行 相应的patch命令 ，如 gradlew tinkerPatchBinnanDebug ，等待编译完成即可在build/outputs/thinkerpatch 目录下找到相应文件。
+ *  配置tinkerApplyMappingPath,若是使用 Flavors 多渠道打包，仅需要配置tinkerBuildFlavorDirectory一项即可；
+ *  2.在Terminal中 执行 相应的patch命令 ，如 gradlew tinkerPatchBinnanDebug ，等待编译完成即可在build/outputs/thinkerpatch 目录下找到相应文件。
  *
  * Android端加载patch：
  * 1.将patch文件下载到本地目录, patch .apk 文件路径记为 patchLocation

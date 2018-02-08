@@ -260,9 +260,9 @@ public class SupportAnnotation {
 
 
     /**
-     *。
+     *防止混淆
      */
-    //被这个注解标注的类和方法在混淆的时候将不会被混淆。
+    //被这个注解标注的类和方法在proguard混淆的时候将不会被混淆。
     @Keep
     void myKeepMethod(){}
 

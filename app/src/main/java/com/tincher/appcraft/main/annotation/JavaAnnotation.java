@@ -87,7 +87,7 @@ public class JavaAnnotation {
 
 
     //指明在什么级别保留该注解信息：.java源码；.class文件；Java虚拟机
-    @Retention(RetentionPolicy.SOURCE)
+    @Retention(RetentionPolicy.RUNTIME)
     public @interface re{}
 
     //指明该注解应该包含在被该注解修饰的文档中
@@ -105,9 +105,14 @@ public class JavaAnnotation {
 
     /**
      * ********************** * 2.编译时注解************************************
-     * 另：运行时注解：（@Retention即可）
+     * 另：运行时注解：（@Retention(RetentionPolicy.RUNTIME)即可）
      */
 
+    /**
+     * 注解处理器，在编译期间，JVM会自动运行注解处理器（当然，我们需要将其注册）。
+     * 虽然我们写的Java代码被编译成class就不能被改动了，但是注解处理器会重新生成其他的java代码，
+     * 我们可以通过反射来调用新生成的java文件里面的类或方法。然后JVM再对这些生成的java代码进行编译。这是一个递归的过程。
+     */
 
 
 

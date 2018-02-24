@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
+import com.tincher.appcraft.main.example.activity.ZxingActivity;
 import com.tincher.appcraft.main.main.MainActivity;
 import com.tincher.appcraft.utils.PrefUtil;
 
@@ -94,7 +95,7 @@ public class SplashActivity extends BaseActivity {
         set.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, ZxingActivity.class));
                 SplashActivity.this.finish();
             }
         });

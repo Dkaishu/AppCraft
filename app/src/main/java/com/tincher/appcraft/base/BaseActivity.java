@@ -197,7 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void showUpdateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.dialog_permission_ok_notifyTitle);
-        builder.setMessage(R.string.dialog_permission_ok_notifyMsg);
+        builder.setMessage(R.string.dialog_update_notifyMsg);
         // 拒绝, 退出
         builder.setNegativeButton(R.string.dialog_update_cancel,
                 new DialogInterface.OnClickListener() {

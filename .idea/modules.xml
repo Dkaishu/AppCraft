@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/AppCraft.iml" filepath="$PROJECT_DIR$/AppCraft.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/javalib/javalib.iml" filepath="$PROJECT_DIR$/javalib/javalib.iml" />
-      <module fileurl="file://F:\ASproject\AppCraft\javalib\javalib.iml" filepath="F:\ASproject\AppCraft\javalib\javalib.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttp3/okhttp3.iml" filepath="$PROJECT_DIR$/okhttp3/okhttp3.iml" />
     </modules>
   </component>

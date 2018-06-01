@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -83,30 +82,14 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".main.main.ArcGISTestActivity"
-            android:launchMode="singleTop">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+            android:launchMode="singleTop"/>
         <activity
             android:name=".main.main.ModifyIdentifyTest"
-            android:launchMode="singleTop">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+            android:launchMode="singleTop"/>
         <activity
             android:name=".main.customviewdemo.multi_select.MultiSelectMunuActivity"
             android:launchMode="singleTop">
-            <!--            <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
 
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>-->
         </activity>
 
 
@@ -120,17 +103,31 @@
         <!--</intent-filter>-->
         <!--</activity>-->
         <activity android:name=".main.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".main.example.activity.DaoActivity" />
         <activity android:name=".update.DownloadActivity" />
         <activity android:name=".update.DownloadBreakpointsActivity" />
         <activity android:name=".main.example.activity.ZxingActivity" />
+        <activity android:name=".main.example.activity.ScheduledTimerTestActivity" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".main.main.TempTestActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
         <service android:name="com.tincher.appcraft.update.DownloadService" />
@@ -157,6 +154,7 @@
             android:name="com.iflytek.voiceads.request.IFLYBrowser"
 
             android:screenOrientation="portrait" />
+
         <!--android:authorities="packagename.fileProvider"-->
         <provider
             android:name="android.support.v4.content.FileProvider"

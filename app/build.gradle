@@ -6,6 +6,10 @@ apply plugin: 'org.greenrobot.greendao'
 
 //参考：https://segmentfault.com/a/1190000006940018
 
+def getDate() {
+    new Date().format('yyyyMMddHHmmss')
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -60,7 +64,22 @@ android {
                 throw new InvalidUserDataException(ex.toString())
             }
         }
+
+//        jnidebug {
+//
+//            // This copies the debuggable attribute and debug signing configurations.
+//            initWith debug
+//
+//            applicationIdSuffix ".jnidebug"
+//            jniDebuggable true
+//
+//            packageNameSuffix ".beta"
+//            versionNameSuffix "-beta" + "-build" + getDate()
+//            signingConfig signingConfigs.debug
+//        }
     }
+
+
 
     //用于生成不同编译类型的包，如debug和release包
     buildTypes {
@@ -197,7 +216,7 @@ dependencies {
     //二维码
     compile 'com.github.Dkaishu:ZXingLib:v1.0.1'
     //ArcGIS
-    compile 'com.esri.arcgisruntime:arcgis-android:100.1.0'
+    compile 'com.esri.arcgisruntime:arcgis-android:100.2.1'
     compile files('libs/google_binded_classes-dex2jar.jar')
 
     //tinker
@@ -207,6 +226,9 @@ dependencies {
     provided('com.tencent.tinker:tinker-android-anno:1.9.2')
     //tinker's main Android lib
     compile('com.tencent.tinker:tinker-android-lib:1.9.2')
+    // leakcanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
 
 greendao {

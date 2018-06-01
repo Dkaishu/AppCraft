@@ -8,6 +8,7 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 
 import com.dkaishu.zxinglib.activity.ZXingLib;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
@@ -50,6 +51,12 @@ public class BaseApplication extends DefaultApplicationLike {
         //        DBManager.init(this);
         ZXingLib.initDisplayOpinion(getApplication());
         Utils.init(getApplication());
+        if (LeakCanary.isInAnalyzerProcess(getApplication())) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(getApplication());
     }
 
     /**

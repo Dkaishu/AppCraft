@@ -11,12 +11,12 @@ public class NetworkUtil {
     /**
      * 网络是否可用
      */
-    public static boolean isNetworkAvailable(Context context){
+    public static boolean isNetworkAvailable(Context context) {
         if (context != null) {
             ConnectivityManager cm = (ConnectivityManager)
-                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             final NetworkInfo network = cm.getActiveNetworkInfo();
-            if(network != null && network.getState() == NetworkInfo.State.CONNECTED){
+            if (network != null && network.getState() == NetworkInfo.State.CONNECTED) {
                 return true;
             }
         }
@@ -28,7 +28,7 @@ public class NetworkUtil {
      */
     public static boolean isNetworkConnected(Context context) {
         if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo network = mConnectivityManager
                     .getActiveNetworkInfo();
@@ -44,7 +44,7 @@ public class NetworkUtil {
      */
     public static boolean isWifiConnected(Context context) {
         if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo wifi = mConnectivityManager
                     .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -58,9 +58,9 @@ public class NetworkUtil {
     /**
      * 判断MOBILE网络是否可用
      */
-    public static boolean isMobileConnected(Context context){
+    public static boolean isMobileConnected(Context context) {
         if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo mobile = mConnectivityManager
                     .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -74,9 +74,9 @@ public class NetworkUtil {
     /**
      * 获取当前网络连接的类型信息
      */
-    public static int getNetworkTypeConnected(Context context){
+    public static int getNetworkTypeConnected(Context context) {
         if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo network = mConnectivityManager
                     .getActiveNetworkInfo();
@@ -88,11 +88,10 @@ public class NetworkUtil {
     }
 
     /**
-     *
-     *获取当前的网络状态
+     * 获取当前的网络状态
      */
-    public static String getNetworkType(Context context){
-        ConnectivityManager cm = (ConnectivityManager) context
+    public static String getNetworkType(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo network = cm.getActiveNetworkInfo();
         if (network == null) {
@@ -104,11 +103,5 @@ public class NetworkUtil {
             return NetInfo.WIFI;
         }
         return NetInfo.NONE_NET;
-
     }
-
-
-
-
-
 }

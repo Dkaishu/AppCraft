@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.tincher.appcraft.R;
 import com.tincher.appcraft.base.BaseActivity;
 import com.tincher.appcraft.utils.DeviceUtils;
@@ -103,8 +104,34 @@ public class ModifyIdentifyTest extends BaseActivity {
         tvSimIMSIDefault.setText(getSimIMSI());
         tvLocalWIFIIpAdress.setText(getLocalWIFIIpAdress());
         tvGPRSLocalIpAddress.setText(getGPRSLocalIpAddress());
+
+        log2();
     }
 
+
+/*    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+
+        setContentView(R.layout.activity_test_modify_indentify);
+        tvImeiDefault.setText(getImei(this));
+        tvIDDefault.setText(getID());
+        tvWifiMacDefault.setText(getWifiMac());
+        tvWifiSsidDefault.setText(getMacSSID());
+        tvPhoneDefault.setText(getPhoneNumber());
+        tvSimIccidDefault.setText(getSimIccid());
+        tvSimIMSIDefault.setText(getSimIMSI());
+        tvLocalWIFIIpAdress.setText(getLocalWIFIIpAdress());
+        tvGPRSLocalIpAddress.setText(getGPRSLocalIpAddress());
+    }*/
+
+/*    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }*/
 
     private String getImei(Context context) {
         return DeviceUtils.getIMEI(context).get(0);
@@ -183,6 +210,12 @@ public class ModifyIdentifyTest extends BaseActivity {
             case R.id.bt_other:
                 break;
         }
+    }
+
+    private void log2(){
+        AppUtils.isAppDebug();
+        AppUtils.isAppRoot();
+
     }
 
 }

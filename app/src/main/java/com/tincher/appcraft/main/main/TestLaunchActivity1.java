@@ -12,7 +12,7 @@ import com.tincher.appcraft.R;
  * Created by dks on 2017/11/21.
  */
 
-public class TestLaunchActivity1 extends Activity{
+public class TestLaunchActivity1 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,8 @@ public class TestLaunchActivity1 extends Activity{
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TestLaunchActivity1.this,TestLaunchActivity2.class));
+//                startActivity(new Intent(TestLaunchActivity1.this,TestLaunchActivity2.class));
+                startActivity(new Intent(TestLaunchActivity1.this, ModifyIdentifyTest.class));
             }
         });
 
